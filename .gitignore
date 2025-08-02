@@ -1,0 +1,5 @@
+# Python
+__pycache__/
+*.pyc
+long_term_memory/
+*.env
