@@ -82,8 +82,8 @@ def conversation_loop():
         }
     ]
     
+    print("AI assistant is ready to chat. Type 'exit' or 'quit' to end the conversation.")
     while True: 
-        print("AI assistant is ready to chat. Type 'exit' or 'quit' to end the conversation.")
         user_input = input("You: ")
         
         if user_input.lower() in ["exit", "quit"]:
@@ -103,12 +103,12 @@ def conversation_loop():
             tools = tools,
             tool_choice = "auto"
         )
-        print(response)
+        #print(response)
         response_message = response.choices[0].message
         messages.append(response_message)
         
         tool_calls = response.choices[0].message.tool_calls
-        print("Tool Calls:", tool_calls)
+        #print("Tool Calls:", tool_calls)
         if tool_calls:
             for tool_call in tool_calls:
                 function_name = tool_call.function.name
@@ -125,7 +125,18 @@ def conversation_loop():
                     }
                 )
         
-        
+            second_api_response = client.chat.completions.create(
+                model = "gpt-4o-mini",
+                messages = messages
+            )
+            #print(second_api_response)
+            final_message = second_api_response.choices[0].message
+            print(f"AI: {final_message.content}")
+            messages.append(final_message)
+        else:
+            final_message = response_message
+            print(f"AI: {final_message.content}")
+
         
 if __name__ == "__main__":
     conversation_loop()
