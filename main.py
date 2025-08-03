@@ -83,7 +83,7 @@ def conversation_loop():
     ]
     
     while True: 
-        
+        print("AI assistant is ready to chat. Type 'exit' or 'quit' to end the conversation.")
         user_input = input("You: ")
         
         if user_input.lower() in ["exit", "quit"]:
@@ -108,6 +108,23 @@ def conversation_loop():
         messages.append(response_message)
         
         tool_calls = response.choices[0].message.tool_calls
+        print("Tool Calls:", tool_calls)
+        if tool_calls:
+            for tool_call in tool_calls:
+                function_name = tool_call.function.name
+                function_to_call = functions[function_name]
+                function_args = tool_call.function.arguments
+                
+                functions_response = function_to_call(**json.loads(function_args))
+                messages.append(
+                    {
+                        "role": "tool",
+                        "tool_call_id": tool_call.id,
+                        "content": functions_response,
+                        "name": function_name
+                    }
+                )
+        
         
         
 if __name__ == "__main__":
