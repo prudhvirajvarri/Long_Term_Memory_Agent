@@ -39,19 +39,21 @@ The goal of this project is to create a long term memory system for GPT. It will
 ## Setup & Installation
 
 1. **Clone the repository:**
-    ```cmd
-    git clone <https://github.com/prudhvirajvarri/Long_Term_Memory_Agent.git>
+    ```bash
+    git clone https://github.com/prudhvirajvarri/Long_Term_Memory_Agent.git
     cd LONG_TERM_MEMORY_AGENT
     ```
 
 2. **Create a virtual environment:**
-   ```cmd
+   ```bash
+   # On Windows
    python -m venv long_term_memory
    long_term_memory\Scripts\activate
+
    ```
 
 3. **Install dependencies:**
-   ```cmd
+   ```bash
    pip install -r requirements.txt
    ```
 
@@ -67,9 +69,13 @@ The goal of this project is to create a long term memory system for GPT. It will
 
 Open your terminal:
 
-```cmd
+```bash
 python main.py
 ```
+
+---
+
+
 
 # Example Conversation
 
