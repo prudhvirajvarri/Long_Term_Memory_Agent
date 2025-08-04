@@ -67,7 +67,9 @@ def retrieve_memory(query: str):
 def delete_memory(query: str):
     try:
         results = memory_collection.query(
-            query_texts = [query]
+            query_texts = [query],
+            n_results = 1,
+            include=["documents", "distances", "ids"]
         )
         
         if not results or not results['documents'][0]:
