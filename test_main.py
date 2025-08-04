@@ -3,6 +3,7 @@ from unittest.mock import patch, MagicMock
 import json
 
 @patch('main.client.chat.completions.create')
+
 def test_conversation_triggers_create_memory(mock_openai_create):
     mock_tool_call_response = MagicMock()
     tool_call = MagicMock()
