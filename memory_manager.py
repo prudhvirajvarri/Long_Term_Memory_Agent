@@ -9,6 +9,9 @@ memory_collection = client.get_or_create_collection(
     name = "memory_collection",
     metadata = {"hnsw:space" : "cosine"}
 )
+
+#print(memory_collection)
+"""
 max_memory = 1
 
 def get_file_size(file_path = "memory_db"):
@@ -20,12 +23,15 @@ def get_file_size(file_path = "memory_db"):
     # Convert size from bytesto GB
     total_size_gb = total_size / (1024 ** 3)
     return total_size_gb
+"""
 
 def create_memory(content: str):
     try:
         #while get_file_size() >= max_memory:
             #print("Memory limit reached. Deleting old memories.")
-           
+        if not content or content.strip():
+            return "Error creating memory: Content cannot be empty or whitespace."
+          
         curr_time = time.time()
         memory_id = str(uuid.uuid4())
         memory_collection.add(
