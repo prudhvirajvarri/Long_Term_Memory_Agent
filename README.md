@@ -50,6 +50,10 @@ The goal of this project is to create a long term memory system for GPT. It will
    python -m venv long_term_memory
    long_term_memory\Scripts\activate
 
+   # On macOS/Linux
+   python3 -m venv long_term_memory
+   source long_term_memory/bin/activate
+
    ```
 
 3. **Install dependencies:**
@@ -61,6 +65,18 @@ The goal of this project is to create a long term memory system for GPT. It will
    Create a file named '.env' in this add your OpenAI API key:
    ```
    OPENAI_API_KEY = "your_API_key"
+   ```
+---
+
+## Running Tests
+I have included test files to check if the memory functions and tool calling logic are working correctly.
+1. **Install testing dependencies:**
+   ```bash
+   pip install pytest
+   ```
+2. **Run all tests:**
+   ```bash
+   pytest
    ```
 
 ---
@@ -74,8 +90,6 @@ python main.py
 ```
 
 ---
-
-
 
 # Example Conversation
 
