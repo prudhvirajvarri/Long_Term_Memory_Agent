@@ -29,7 +29,7 @@ def create_memory(content: str):
     try:
         #while get_file_size() >= max_memory:
             #print("Memory limit reached. Deleting old memories.")
-        if not content or content.strip():
+        if not content or not content.strip():
             return "Error creating memory: Content cannot be empty or whitespace."
           
         curr_time = time.time()
@@ -69,10 +69,14 @@ def delete_memory(query: str):
         results = memory_collection.query(
             query_texts = [query],
             n_results = 1,
-            include=["documents", "distances", "ids"]
+            include=["documents", "distances"]
         )
         
         if not results or not results['documents'][0]:
+            return "No relevant memory found to delete."
+        
+        distance = results['distances'][0][0]
+        if distance > 0.9:
             return "No relevant memory found to delete."
         
         memory_id_to_delete = results['ids'][0][0]
