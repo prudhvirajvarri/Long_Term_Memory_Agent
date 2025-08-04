@@ -5,61 +5,61 @@ The goal of this project is to create a long term memory system for GPT. It will
 ## Features
 
 * **Create Memories:** Tell the agent to remember information or facts.
-* **Retrieve Memories:** Ask the agent questions related to past informations or facts you have given.
-* **Delete Memories:** Tell the agent to forget informarion or facts.
+* **Retrieve Memories:** Ask the agent questions related to past information or facts you have given.
+* **Delete Memories:** Tell the agent to forget information or facts.
 
 ---
 
 ## Design Decisions
 
 1. **Memory Storage:**
-   I chose ChromaDB as local vector database to store, retrieve and delete memory. Used persistent storage (PersistentClient) for long term memory management.
-    * Used cosine similarity as the distance metric for semantic similarity search this helps to retrieve relavent memory even if the query phrashing differently.
+   I chose ChromaDB as a local vector database to store, retrieve and delete memory. Used persistent storage (PersistentClient) for long term memory management.
+    * Used cosine similarity as the distance metric for semantic similarity search, which helps to retrieve relevant memory even if the query phrases are different.
 
 2. **Tool Calling:**
-   I used OpenAI tool calling feature to connect the model with my memory management function.
+   I used the OpenAI tool's calling feature to connect the model with my memory management function.
     * I defined the tools **create_memory**, **retrieve_memory**, **delete_memory** and let the model decide by itself to call the required function based on what the user says.
 
 3. **Model Selection:**
-   I used  **gpt-4o-mini** model.
-    * It is fast, handels tool use well and is cheaper to run.
+   I used the **gpt-4o-mini** model.
+    * It is fast, handles tools well and is cheaper to run.
 
 4. **Safe deletion:**
    I added a similarity check in the delete_memory function.
-    * If the distance is more than 0.9 the memory won't be deleted. This will avoid deleting unrelated memories.
+    * If the distance is more than 0.9, the memory won't be deleted. This will avoid deleting unrelated memories.
 
 5. **Future Improvements:**
    I want to set a limit on how much space the memory can use. This is to make sure it doesn't take up all the free space on the system.
     * I already added timestamp(created_at) in the Metadata, which helps track older memories.
-    * In the future, when storage is full I plan to take the old memories and pass them to the model to summarize.
-    * The summarized version will take less space and still keep the important information.
+    * In the future, when storage is full, I plan to take the old memories and pass them to the model to summarise.
+    * The summarised version will take less space and still keep the important information.
 
 ---
 
 ## Setup & Installation
 
 1. **Clone the repository:**
-    '''cmd
+    ```cmd
     git clone <https://github.com/prudhvirajvarri/Long_Term_Memory_Agent.git>
     cd LONG_TERM_MEMORY_AGENT
-    '''
+    ```
 
 2. **Create a virtual environment:**
-   '''cmd
+   ```cmd
    python -m venv long_term_memory
    long_term_memory\Scripts\activate
-   '''
+   ```
 
 3. **Install dependencies:**
-   '''cmd
+   ```cmd
    pip install -r requirements.txt
-   '''
+   ```
 
 4. **Set up your API key:**
-   create a file named '.env' in this add your OpenAI API key:
-   '''
+   Create a file named '.env' in this add your OpenAI API key:
+   ```
    OPENAI_API_KEY = "your_API_key"
-   '''
+   ```
 
 ---
 
@@ -67,13 +67,13 @@ The goal of this project is to create a long term memory system for GPT. It will
 
 Open your terminal:
 
-'''cmd
+```cmd
 python main.py
-'''
+```
 
 # Example Conversation
 
-'''
+```
 
 AI assistant is ready to chat. Type 'exit' or 'quit' to end the conversation.
 You: Hi
@@ -97,11 +97,11 @@ You:
 AI: It seems like your message may not have come through. How can I help you today?
 You: delete my name.
 AI: I've removed your name from memory. If there's anything else you'd like me to do, just let me know!
-You: What is my name? 
+You: What is my name?
 AI: It seems I no longer have your name stored in memory. Would you like to tell me your name again?
-You: what is my favourite food?
-AI: I don't have any information about your favorite food at the moment. If you'd like to share it, I can remember it for you!
+You: What is my favourite food?
+AI: I don't have any information about your favourite food at the moment. If you'd like to share it, I can remember it for you!
 You: exit
 Exiting the conversation. Goodbye!
 
-'''
+```
