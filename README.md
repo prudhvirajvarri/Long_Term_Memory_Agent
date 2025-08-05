@@ -29,7 +29,7 @@ The goal of this project is to create a long term memory system for GPT. It will
     * If the distance is more than 0.9, the memory won't be deleted. This will avoid deleting unrelated memories.
 
 5. **Future Improvements:**
-   I want to set a limit on how much space the memory can use. This is to make sure it doesn't take up all the free space on the system.
+   I want to set a limit on how much memory can be used. This is to make sure it doesn't take up all the free space on the system.
     * I already added timestamp(created_at) in the Metadata, which helps track older memories.
     * In the future, when storage is full, I plan to take the old memories and pass them to the model to summarise.
     * The summarised version will take less space and still keep the important information.
@@ -68,20 +68,7 @@ The goal of this project is to create a long term memory system for GPT. It will
    ```
 ---
 
-## Running Tests
-I have included test files to check if the memory functions and tool calling logic are working correctly.
-1. **Install testing dependencies:**
-   ```bash
-   pip install pytest
-   ```
-2. **Run all tests:**
-   ```bash
-   pytest
-   ```
-
----
-
-# How to Run
+## How to Run
 
 Open your terminal:
 
@@ -91,7 +78,7 @@ python main.py
 
 ---
 
-# Example Conversation
+## Example Conversation
 
 ```
 
@@ -125,3 +112,32 @@ You: exit
 Exiting the conversation. Goodbye!
 
 ```
+
+---
+
+## Test Automation
+
+I've included tests to make sure the memory functions and the AI's tool-calling logic work correctly. I used Gemini to help me write the test cases for `test_main.py` and `test_memory_manager.py`.
+
+### test_main.py
+
+This file checks if the AI correctly uses its tools. It ensures that when you ask the AI to remember something, the `create_memory` function is called as it should be.
+
+### test_memory_manager.py
+
+This file focuses on testing the core memory functions: creating, retrieving, and deleting memories. It checks that:
+
+* A memory can be successfully created, found, and then deleted.
+* The system handles cases where no relevant memory is found.
+* The `create_memory` function works with different types of text and correctly rejects empty inputs.
+* The system can retrieve the correct memory even with a vaguely worded query (e.g., retrieving a memory about a "car" when asked about a "vehicle").
+* Trying to delete a memory that doesn't exist doesn't cause any problems.
+
+1.  **Install testing dependencies:**
+    ```bash
+    pip install pytest
+    ```
+2.  **Run all tests:**
+    ```bash
+    pytest
+    ```
